@@ -1,9 +1,9 @@
-FROM ubuntu
-MAINTAINER neolao <contact@neolao.com>
+FROM ubuntu:latest
 
-RUN apt-get install -y software-properties-common && \
-    add-apt-repository ppa:mdoyen/homebank && \
-    apt-get update && \
-    apt-get install -y homebank
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    software-properties-common \
+&& add-apt-repository ppa:mdoyen/homebank && apt-get update && apt-get install -yq --no-install-recommends \
+    homebank \
+&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 CMD ["/usr/bin/homebank"]
