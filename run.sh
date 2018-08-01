@@ -1,5 +1,4 @@
 #!/bin/bash
-
 scriptPath="$( readlink -f "$( dirname "$0" )" )/$( basename "$0" )"
 currentDirectory=$(dirname $scriptPath)
 fileDirectory=$currentDirectory/files
@@ -11,14 +10,12 @@ then
 fi
 
 # Authorize X server to accept connections
-xhost +
+xhost + $(hostname)
 
 # Run the application
-docker run -it \
+docker run -it --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -e DISPLAY=unix$DISPLAY \
     -v $fileDirectory:/root/files \
-    --rm \
+    -e DISPLAY=$(hostname)$DISPLAY \
     --name homebank \
-    neolao/homebank
-
+    homebank
