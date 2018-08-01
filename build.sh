@@ -1,3 +1,2 @@
 #!/bin/bash
-
-docker build -t neolao/homebank .
+docker build -t homebank .
